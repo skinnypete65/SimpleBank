@@ -20,7 +20,7 @@ type createUserResponse struct {
 	Username          string    `json:"username"`
 	FullName          string    `json:"full_name"`
 	Email             string    `json:"email"`
-	PasswordChangerAt time.Time `json:"password_changer_at"`
+	PasswordChangedAt time.Time `json:"password_changed_at"`
 	CreatedAt         time.Time `json:"created_at"`
 }
 
@@ -61,7 +61,7 @@ func (s *Server) createUser(ctx *gin.Context) {
 		Username:          user.Username,
 		FullName:          user.FullName,
 		Email:             user.Email,
-		PasswordChangerAt: user.PasswordChangedAt,
+		PasswordChangedAt: user.PasswordChangedAt,
 		CreatedAt:         user.CreatedAt,
 	}
 
