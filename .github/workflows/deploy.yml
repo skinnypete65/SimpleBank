@@ -3,6 +3,10 @@ name: Deploy to production
 on:
   push:
     workflow_dispatch:
+      inputs:
+        name:
+          description: "Who to greet"
+          default: "World"
 
 jobs:
   build:
