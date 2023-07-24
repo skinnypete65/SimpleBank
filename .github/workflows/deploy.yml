@@ -1,12 +1,8 @@
 name: Deploy to production
 
 on:
-  workflow_dispatch:
-    inputs:
-      myInput:
-        description: 'User Input:'
-        required: true
-        default: "Hello World"
+  push:
+    branches: [ master ]
 
 jobs:
   build:
@@ -30,3 +26,4 @@ jobs:
         run: |
           docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+
