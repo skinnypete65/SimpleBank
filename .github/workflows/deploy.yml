@@ -12,19 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Fetch secret
+        id: lockbox-secret
+        uses: yc-actions/yc-lockbox@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          secret-id: ${{ secrets.LOCKBOX_ID }}
+
       - name: Login to Yandex Cloud Container Registry
         id: login-cr
         uses: yc-actions/yc-cr-login@v1
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-
-      - name: Load secrets and save to app.env
-        env:
-          LOCKBOX_ID: ${{ secrets.LOCKBOX_ID }}
-        run: |
-          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-          export IAM_TOKEN=$(yc iam create-token)
-          curl -X GET -H "Authorization: Bearer ${IAM_TOKEN}" https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/$LOCKBOX_ID/payload | jq -r '.["entries"]|map("\(.key)=\(.textValue)")|.[]' > app.env
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
