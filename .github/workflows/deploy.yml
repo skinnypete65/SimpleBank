@@ -19,7 +19,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Load secrets and save to app.env
-          run: curl -X GET -H "Authorization: Bearer ${{secrets.IAM_TOKEN}}" https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/e6qqr6f1ae98fp33mfi1/payload | jq -r '.["entries"]|map("\(.key)=\(.textValue)")|.[]' > app.env
+          run: curl -X GET -H "Authorization: Bearer ${{ secrets.IAM_TOKEN }}" https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/e6qqr6f1ae98fp33mfi1/payload | jq -r '.["entries"]|map("\(.key)=\(.textValue)")|.[]' > app.env
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
