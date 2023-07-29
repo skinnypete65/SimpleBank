@@ -20,7 +20,7 @@ jobs:
 
       - name: Load secrets and save to app.env
         env:
-          LOCKBOX_ID: ${{ LOCKBOX_ID }}
+          LOCKBOX_ID: ${{ secrets.LOCKBOX_ID }}
         run: |
           export IAM_TOKEN=$(yc iam create-token)
           curl -X GET -H "Authorization: Bearer ${IAM_TOKEN}" https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/$LOCKBOX_ID/payload | jq -r '.["entries"]|map("\(.key)=\(.textValue)")|.[]' > app.env
