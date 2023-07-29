@@ -21,8 +21,12 @@ jobs:
 
       - name: Test secrets
         run: |
-          echo $DB_SOURCE
-          echo steps.lockbox-secret.outputs.DB_SOURCE
+          echo "DB_SOURCE=$DB_SOURCE" >> app.env
+          echo "DB_DRIVER=$DB_DRIVER" >> app.env
+          echo "SERVER_ADDRESS=$SERVER_ADDRESS" >> app.env
+          echo "ACCESS_TOKEN_DURATION=$ACCESS_TOKEN_DURATION" >> app.env
+          echo "TOKEN_SYMMETRIC_KEY=$TOKEN_SYMMETRIC_KEY" >> app.env
+          cat app.env
 
       - name: Login to Yandex Cloud Container Registry
         id: login-cr
