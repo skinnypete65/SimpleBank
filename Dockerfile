@@ -20,4 +20,6 @@ COPY start.sh .
 
 EXPOSE 8080
 CMD ["/app/main"]
+
+RUN chmod +x /app/start.sh
 ENTRYPOINT ["/app/start.sh"]
