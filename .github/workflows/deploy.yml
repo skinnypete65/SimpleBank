@@ -20,13 +20,14 @@ jobs:
           secret-id: ${{ secrets.LOCKBOX_ID }}
 
       - name: Test secrets
+        env:
+          DB_SOURCE: ${{ steps.lockbox-secret.outputs.DB_SOURCE }}
+          DB_DRIVER: ${{ steps.lockbox-secret.outputs.DB_DRIVER }}
+          SERVER_ADDRESS: ${{ steps.lockbox-secret.outputs.SERVER_ADDRESS }}
         run: |
-          echo "DB_SOURCE=$DB_SOURCE" >> app.env
-          echo "DB_DRIVER=$DB_DRIVER" >> app.env
-          echo "SERVER_ADDRESS=$SERVER_ADDRESS" >> app.env
-          echo "ACCESS_TOKEN_DURATION=$ACCESS_TOKEN_DURATION" >> app.env
-          echo "TOKEN_SYMMETRIC_KEY=$TOKEN_SYMMETRIC_KEY" >> app.env
-          cat app.env
+          echo $DB_SOURCE
+          echo $DB_DRIVER
+          echo $SERVER_ADDRESS
 
       - name: Login to Yandex Cloud Container Registry
         id: login-cr
