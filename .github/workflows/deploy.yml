@@ -19,7 +19,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
           secret-id: ${{ secrets.LOCKBOX_ID }}
 
-      - name: Test secrets
+      - name: Save secrets to app.env
         env:
           DB_SOURCE: ${{ steps.lockbox-secret.outputs.DB_SOURCE }}
           DB_DRIVER: ${{ steps.lockbox-secret.outputs.DB_DRIVER }}
@@ -34,7 +34,6 @@ jobs:
           ACCESS_TOKEN_DURATION=$ACCESS_TOKEN_DURATION
           TOKEN_SYMMETRIC_KEY=$TOKEN_SYMMETRIC_KEY
           " > app.env
-          cat app.env
 
       - name: Login to Yandex Cloud Container Registry
         id: login-cr
