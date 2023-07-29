@@ -28,11 +28,11 @@ jobs:
           TOKEN_SYMMETRIC_KEY: ${{ steps.lockbox-secret.outputs.TOKEN_SYMMETRIC_KEY }}
         run: |
           echo "
-          DB_SOURCE=$DB_SOURCE\n
-          DB_DRIVER=$DB_DRIVER\n
-          SERVER_ADDRESS=$SERVER_ADDRESS\n
-          ACCESS_TOKEN_DURATION=$ACCESS_TOKEN_DURATION\n
-          TOKEN_SYMMETRIC_KEY=$TOKEN_SYMMETRIC_KEY\n
+          DB_SOURCE=$DB_SOURCE
+          DB_DRIVER=$DB_DRIVER
+          SERVER_ADDRESS=$SERVER_ADDRESS
+          ACCESS_TOKEN_DURATION=$ACCESS_TOKEN_DURATION
+          TOKEN_SYMMETRIC_KEY=$TOKEN_SYMMETRIC_KEY
           " > app.env
           cat app.env
 
